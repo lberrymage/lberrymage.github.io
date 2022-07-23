@@ -1,0 +1,7 @@
+baseURL = "https://lberrymage.dev/"
+languageCode = "en-us"
+title = "Logan's Blog"
+theme = "WonderMod"
+
+[params]
+defaultTheme = "dark"
