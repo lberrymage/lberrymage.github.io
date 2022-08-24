@@ -1,1 +1,0 @@
-function loadPreferredTheme(){localStorage.getItem("pref-theme")==="light"&&document.body.classList.remove("dark")}loadPreferredTheme()
