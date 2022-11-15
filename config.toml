@@ -5,3 +5,7 @@ theme = "WonderMod"
 
 [params]
 defaultTheme = "dark"
+
+  [params.homeInfoParams]
+  title = "Welcome to the rabbit hole."
+  content = "Thoughts on security, privacy, development, and Android."
