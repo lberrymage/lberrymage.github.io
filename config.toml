@@ -9,3 +9,19 @@ defaultTheme = "dark"
   [params.homeInfoParams]
   title = "Welcome to the rabbit hole."
   content = "Thoughts on security, privacy, development, and Android."
+
+  [[params.socialIcons]]
+  name = "mastodon"
+  url = "https://infosec.exchange/@lberrymage"
+
+  [[params.socialIcons]]
+  name = "twitter"
+  url = "https://twitter.com/@lberrymage"
+
+  [[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/lberrymage"
+
+  [[params.socialIcons]]
+  name = "matrix"
+  url = "https://matrix.to/#/@lberrymage:matrix.org"
