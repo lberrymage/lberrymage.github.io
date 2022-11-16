@@ -10,6 +10,9 @@ env = "production"
 defaultTheme = "dark"
 showFullTextInRss = true
 
+  [params.assets]
+  disableHLJS = true
+
   [params.homeInfoParams]
   title = "Welcome to the rabbit hole."
   content = "Thoughts on security, privacy, development, and Android."
