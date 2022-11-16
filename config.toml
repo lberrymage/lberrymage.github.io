@@ -33,3 +33,7 @@ showFullTextInRss = true
   [[params.socialIcons]]
   name = "matrix"
   url = "https://matrix.to/#/@lberrymage:matrix.org"
+
+  [[params.socialIcons]]
+  name = "rss"
+  url = "/index.xml"
