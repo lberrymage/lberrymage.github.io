@@ -5,6 +5,7 @@ title = "Logan's Blog"
 theme = "WonderMod"
 
 [params]
+env = "production"
 defaultTheme = "dark"
 showFullTextInRss = true
 
