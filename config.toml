@@ -6,6 +6,7 @@ theme = "WonderMod"
 
 [params]
 defaultTheme = "dark"
+showFullTextInRss = true
 
   [params.homeInfoParams]
   title = "Welcome to the rabbit hole."
