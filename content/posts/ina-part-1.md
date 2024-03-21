@@ -41,11 +41,11 @@ working with wide-scale deployments, the naive approach suffers from a considera
 copy of the latest software must be distributed to each client. [^2]
 
 This is turn causes higher bandwidth costs for both clients and the server operator, less frequent
-updates (which may contain security fixes!), slower rollout, and more more update interruptions
-which may require starting the update over from the beginning. The client-facing issues are
-especially troublesome in countries where Wi-Fi isn't commonplace and cellular data is slow and
-expensive. Clearly, a solution to reduce these update sizes would be beneficial for both clients and
-the update server operator. But how can we do this?
+updates (which may contain security fixes!), slower rollout, and more update interruptions which may
+require starting the update over from the beginning. The client-facing issues are especially
+troublesome in countries where Wi-Fi isn't commonplace and cellular data is slow and expensive.
+Clearly, a solution to reduce these update sizes would be beneficial for both clients and the update
+server operator. But how can we do this?
 
 # Attempt 1: Data compression
 
