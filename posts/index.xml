@@ -28,11 +28,11 @@ relatively easy to implement. Many software update systems still work this way. 
 working with wide-scale deployments, the naive approach suffers from a considerable issue: a full
 copy of the latest software must be distributed to each client. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 <p>This is turn causes higher bandwidth costs for both clients and the server operator, less frequent
-updates (which may contain security fixes!), slower rollout, and more more update interruptions
-which may require starting the update over from the beginning. The client-facing issues are
-especially troublesome in countries where Wi-Fi isn&rsquo;t commonplace and cellular data is slow and
-expensive. Clearly, a solution to reduce these update sizes would be beneficial for both clients and
-the update server operator. But how can we do this?</p>
+updates (which may contain security fixes!), slower rollout, and more update interruptions which may
+require starting the update over from the beginning. The client-facing issues are especially
+troublesome in countries where Wi-Fi isn&rsquo;t commonplace and cellular data is slow and expensive.
+Clearly, a solution to reduce these update sizes would be beneficial for both clients and the update
+server operator. But how can we do this?</p>
 <h1 id="attempt-1-data-compression">Attempt 1: Data compression</h1>
 <p>Perhaps the most obvious first step to reduce update size is to apply generic data compression.
 Using zstd at level 19, we get the following results:</p>
