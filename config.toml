@@ -10,6 +10,7 @@ author = "Logan Magee"
 env = "production"
 defaultTheme = "dark"
 showFullTextInRss = true
+showToc = true
 
   [params.assets]
   disableHLJS = true
