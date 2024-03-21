@@ -1,4 +1,170 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Logan's Blog</title><link rel="alternate" href="https://lberrymage.dev/"/><link rel="self" href="https://lberrymage.dev/index.xml"/><subtitle>Recent content on Logan's Blog</subtitle><id>https://lberrymage.dev/</id><generator uri="http://gohugo.io" version="0.124.1">Hugo</generator><language>en-us</language><updated>2022-12-16T00:00:00Z</updated><author><name>Logan Magee</name></author><rights>Copyright 2022-2024 Logan Magee</rights><entry><title>Accrescent has reached public alpha!</title><link rel="alternate" href="https://lberrymage.dev/posts/accrescent-alpha/"/><id>https://lberrymage.dev/posts/accrescent-alpha/</id><published>2022-12-16T00:00:00Z</published><updated>2022-12-16T00:00:00Z</updated><summary type="html">As some of you may know, I&amp;rsquo;ve been working on building a new Android app store called Accrescent for almost a year now. My goal was to solve the inherent security, privacy, and usability issues of existing Android app stores by designing a new store from the ground up to address them. Today, I&amp;rsquo;m proud to announce that Accrescent has entered public alpha! You can try it out yourself today by downloading it from our website or from our GitHub releases.</summary><content type="html"><![CDATA[<p>As some of you may know, I&rsquo;ve been working on building a new Android app store called <a href="https://accrescent.app">Accrescent</a>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Logan's Blog</title><link rel="alternate" href="https://lberrymage.dev/"/><link rel="self" href="https://lberrymage.dev/index.xml"/><subtitle>Recent content on Logan's Blog</subtitle><id>https://lberrymage.dev/</id><generator uri="http://gohugo.io" version="0.124.1">Hugo</generator><language>en-us</language><updated>2024-03-20T00:00:00Z</updated><author><name>Logan Magee</name></author><rights>Copyright 2022-2024 Logan Magee</rights><entry><title>Ina, part 1: Smaller, faster, and safer software updates for Accrescent</title><link rel="alternate" href="https://lberrymage.dev/posts/ina-part-1/"/><id>https://lberrymage.dev/posts/ina-part-1/</id><published>2024-03-20T00:00:00Z</published><updated>2024-03-20T00:00:00Z</updated><summary type="html">Introduction Well! It&amp;rsquo;s been a long time since I&amp;rsquo;ve shared an Accrescent update here (most development discussion takes place in our Matrix rooms), but today I have a big one: we&amp;rsquo;ve made significant progress in developing delta updates!
+&amp;ldquo;That sounds great and fancy!&amp;rdquo; I hear you say, &amp;ldquo;but what in the world are delta updates, and why would I care?&amp;rdquo;
+Well, to give a quick summary, delta updates bring your software update sizes from looking like this:</summary><content type="html"><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>Well! It&rsquo;s been a long time since I&rsquo;ve shared an <a href="https://accrescent.app">Accrescent</a> update here (most development
+discussion takes place in our <a href="https://matrix.to/#/#accrescent-space:matrix.org">Matrix rooms</a>), but today I have a big one: we&rsquo;ve made significant
+progress in developing delta updates!</p>
+<p>&ldquo;That sounds great and fancy!&rdquo; I hear you say, &ldquo;but what in the world are delta updates, and why
+would I care?&rdquo;</p>
+<p>Well, to give a quick summary, delta updates bring your software update sizes from looking like
+this:</p>
+<p><img loading="lazy" src="/delta-updates-naive.png" alt="Naive delta update sizes for various programs"  />
+</p>
+<p>to this:</p>
+<p><img loading="lazy" src="/delta-updates-delta.png" alt="Delta update sizes for various programs"  />
+</p>
+<p>If you&rsquo;re curious as to how, keep reading. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h1 id="background">Background</h1>
+<p>In a basic software update system, the update process looks something like this:</p>
+<p><img loading="lazy" src="/delta-updates-naive-visual.png" alt="Visualization of the naive approach"  />
+</p>
+<ol>
+<li>Download the newest version of the software to disk.</li>
+<li>Replace the old software files with the new ones.</li>
+</ol>
+<p>For the sake of convenience, we&rsquo;ll refer to this process as the &ldquo;naive approach.&rdquo;</p>
+<p>There isn&rsquo;t anything <em>wrong</em> with the naive approach per se; it&rsquo;s simple, it works, and it&rsquo;s
+relatively easy to implement. Many software update systems still work this way. However, when
+working with wide-scale deployments, the naive approach suffers from a considerable issue: a full
+copy of the latest software must be distributed to each client. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>This is turn causes higher bandwidth costs for both clients and the server operator, less frequent
+updates (which may contain security fixes!), slower rollout, and more more update interruptions
+which may require starting the update over from the beginning. The client-facing issues are
+especially troublesome in countries where Wi-Fi isn&rsquo;t commonplace and cellular data is slow and
+expensive. Clearly, a solution to reduce these update sizes would be beneficial for both clients and
+the update server operator. But how can we do this?</p>
+<h1 id="attempt-1-data-compression">Attempt 1: Data compression</h1>
+<p>Perhaps the most obvious first step to reduce update size is to apply generic data compression.
+Using zstd at level 19, we get the following results:</p>
+<p><img loading="lazy" src="/delta-updates-naive-compressed.png" alt="Compressed update sizes compared against the naive approach"  />
+</p>
+<p>Not bad! But these results are still far from the delta update sizes shown in the introduction. So
+how can we possibly reduce them further?</p>
+<h2 id="data-compression-in-theory">Data compression in theory</h2>
+<p>While deep data compression theory is outside the scope of this article, a brief description of how
+data compression works will help understand the approach to solving this problem. In general, data
+compression algorithms exploit patterns in data to represent said data in fewer bytes. For example,
+say we want to compress the sequence &ldquo;AAAA&rdquo;. We easily see that we&rsquo;re only using one character, A,
+and that it repeats four times. We could design a compression scheme which exploits this pattern by
+encoding it as a character followed by how many repeats of that character exist. <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> In this
+example, we could compress our input sequence to &ldquo;A4,&rdquo; a 50% size reduction.</p>
+<p>Another important concept to understand is that the more you know about the type and format of the
+data you&rsquo;re compressing, the more specific patterns you can detect and potentially exploit to reduce
+compressed file size. Expanding the above example, let&rsquo;s say we know that our data contains only the
+characters &ldquo;A&rdquo; and &ldquo;B.&rdquo; Thus, we can represent each character as 1 bit (0 representing A, and 1
+representing B). If our length value is encoded as 8 bits, we can then represent &ldquo;A4&rdquo; in 9 bits (as
+opposed to the 16 we would use if encoding &ldquo;A&rdquo; an as ASCII value).</p>
+<p>With that out of the way, let&rsquo;s move on to delta updates!</p>
+<h1 id="attempt-2-delta-updates">Attempt 2: Delta updates</h1>
+<p>We&rsquo;ve discussed how data compression exploits patterns to represent data in fewer bytes. So what
+patterns exist in software updates that we can exploit to reduce the size of our software updates?
+As it turns out, there are two very important ones:</p>
+<ul>
+<li>The new software is usually very similar to the old software with some sparse changes.</li>
+<li>The files being updated are usually executable software.</li>
+</ul>
+<p>We&rsquo;ll leave the second point up for discussion in part 2 of this series where we&rsquo;ll explain the
+algorithm that Accrescent&rsquo;s delta update system uses in more detail. The first point is more
+fundamental to delta update algorithms in general, and it prompts the question: if the new software
+is mostly the same as the old software, what if we encoded <em>only the differences</em> between the two
+and just copied data from the old software when it hasn&rsquo;t changed? That is, instead of viewing a
+software update like this:</p>
+<p><img loading="lazy" src="/delta-updates-naive-visual.png" alt="Visualization of the naive approach"  />
+</p>
+<p>what if we viewed it like this:</p>
+<p><img loading="lazy" src="/delta-updates-delta-visual.png" alt="Visualization of the delta update approach"  />
+</p>
+<p>and only sent the changes to the client? <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<p>Here we have arrived at the concept of delta updates.</p>
+<h1 id="our-solution">Our solution</h1>
+<p>Delta updates themselves are not a novel idea. <a href="https://devblogs.microsoft.com/oldnewthing/20200212-00/?p=103434">Windows</a>, <a href="https://android-developers.googleblog.com/2016/07/improvements-for-smaller-app-downloads.html">Google Play</a>, <a href="https://www.chromium.org/developers/design-documents/software-updates-courgette/">Chrome</a>, <a href="https://source.android.com/docs/core/ota/tools#incremental-updates">Android</a>, and
+more use some form of delta updates to reduce software update sizes. Some of these are partially or
+<a href="https://chromium.googlesource.com/chromium/src/courgette/">completely</a> open-source, making it theoretically possible to adapt one of them for Accrescent&rsquo;s
+usage. However, existing implementations suffer from some or all of the following issues, some of
+them directly counter to Accrescent&rsquo;s goals:</p>
+<ul>
+<li>They are written in memory-unsafe languages like C and C++, making them <a href="https://nvd.nist.gov/vuln/detail/CVE-2014-9862">prone to security
+vulnerabilities</a> and thus undesirable to use in a security-sensitive context.</li>
+<li>They use an excess of main memory when diffing (creating a delta update) and/or patching (applying
+a delta update), making them unsuitable for devices with low memory such as mobile phones and some
+VPSs.</li>
+<li>They have little to no testing, raising questions about their correctness and robustness against
+bug classes outside of memory corruption (which can also be a security concern).</li>
+<li>They have no Android library wrapper.</li>
+</ul>
+<p>Because of this, we decided to create a custom solution to the delta update problem with the
+following goals:</p>
+<ul>
+<li>Memory-safe implementation language</li>
+<li>Low memory requirements</li>
+<li>Batteries-included Android library</li>
+<li>Sandboxed Android patching</li>
+<li>Thorough testing</li>
+<li>Comparable diff and patch performance to existing implementations</li>
+</ul>
+<p>We&rsquo;re happy to say that this effort has been successful with all of the above goals met (except
+Android sandboxing, which will be implemented later). We call the resulting library &ldquo;Ina.&rdquo;</p>
+<h1 id="performance-results">Performance results</h1>
+<p>Of course, numbers speak louder than words, so we&rsquo;ve included some results on how Ina stacks up
+against the competition, specifically against one of the most common open-source implementations of
+delta updates: <a href="https://www.daemonology.net/bsdiff/">bsdiff</a>. Below are the results.</p>
+<p>All numbers were taken as an average of 3 runs on an Arch Linux system with an Intel Core Ultra 7
+155H processor and LPDDR5 memory running at 6400 Mhz. The original version of bsdiff 4.3 was
+compiled with the default Arch package manager compiler flags plus <code>-O3</code>. Ina was compiled in
+release mode without any additional compiler flags. Measurements were taken using GNU <code>time</code>. <sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p><img loading="lazy" src="/delta-updates-perf-diff-time.png" alt="Diffing speed performance chart"  />
+</p>
+<p><img loading="lazy" src="/delta-updates-perf-diff-mem.png" alt="Diffing maximum memory usage performance chart"  />
+</p>
+<p><img loading="lazy" src="/delta-updates-perf-delta-size.png" alt="Delta size performance chart"  />
+</p>
+<p><img loading="lazy" src="/delta-updates-perf-patch-time.png" alt="Patching speed performance chart"  />
+</p>
+<p><img loading="lazy" src="/delta-updates-perf-patch-mem.png" alt="Patching maximum memory usage performance chart"  />
+</p>
+<h1 id="analysis">Analysis</h1>
+<p>Across the board, Ina consistently uses significantly less memory than bsdiff when both diffing and
+patching. Diffing time is comparable, with bsdiff taking a slight lead for dockerd, but Ina taking a
+drastic lead for node. We don&rsquo;t know the exact cause of this, but may investigate in a later part of
+this series. Delta size was comparable between the two programs with Ina taking a slight lead. Ina
+took a drastic lead in patching time. However, it should be noted that patching time may not matter
+much in practice depending on the hardware because it&rsquo;s so low to begin with.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>We&rsquo;ve successfully developed a performant, safe, and robust solution for delta updates to
+incorporate into Accrescent. While Ina is currently missing desired security features such as
+sandboxing, we&rsquo;ve already made significant security and performance improvements over existing
+delta update solutions and are confident we can implement the additional improvements we have
+planned.</p>
+<p>In part 2 of this series, we&rsquo;ll explore exactly how Ina achieves its performance characteristics and
+perhaps investigate alternative algorithms and performance tricks Ina could take advantage of to
+further improve its performance.</p>
+<p>That&rsquo;s all for this one! If you want to keep up on more Accrescent developments, join our <a href="https://matrix.to/#/#accrescent-space:matrix.org">Matrix
+rooms</a>, follow the <a href="https://accrescent.app/#social">Accrescent socials</a>, or keep an eye on this blog where I&rsquo;ll be posting the next
+part of this series on Ina and delta updates.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>All numbers in this post are based on the following Arch Linux x86_64 binaries: dockerd 24.0.7
+and 25.0.2, node 20.11.0 and 20.11.1, and godot 4.1.2 and 4.1.3.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>All active clients with a network connection, of course. Not every client will receive every
+update, especially if the software in question updates frequently, as a newer update may be
+released before a client attempts to update to the previous release.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>This is called <a href="https://en.wikipedia.org/wiki/Run-length_encoding">run-length encoding</a> (RLE). While not often used on its own, RLE is used in
+practice as a part of many popular compression schemes.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>This is an oversimplification. Instructions specifying where to place the changes in the new
+binary and which bytes to copy verbatim from the old binary are also necessary, but I decided to
+omit this from the diagram as the details of the algorithm will be explained in part 2.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content></entry><entry><title>Accrescent has reached public alpha!</title><link rel="alternate" href="https://lberrymage.dev/posts/accrescent-alpha/"/><id>https://lberrymage.dev/posts/accrescent-alpha/</id><published>2022-12-16T00:00:00Z</published><updated>2022-12-16T00:00:00Z</updated><summary type="html">As some of you may know, I&amp;rsquo;ve been working on building a new Android app store called Accrescent for almost a year now. My goal was to solve the inherent security, privacy, and usability issues of existing Android app stores by designing a new store from the ground up to address them. Today, I&amp;rsquo;m proud to announce that Accrescent has entered public alpha! You can try it out yourself today by downloading it from our website or from our GitHub releases.</summary><content type="html"><![CDATA[<p>As some of you may know, I&rsquo;ve been working on building a new Android app store called <a href="https://accrescent.app">Accrescent</a>
 for <a href="https://twitter.com/lberrymage/status/1475307653089792003">almost a year now</a>. My goal was to solve the inherent security, privacy, and usability issues
 of existing Android app stores by designing a new store from the ground up to address them. Today,
 I&rsquo;m proud to announce that Accrescent has entered public alpha! You can try it out yourself today by
