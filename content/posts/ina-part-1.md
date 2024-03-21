@@ -1,5 +1,5 @@
 ---
-title: "Ina, part 1: Smaller, faster, and safer software updates for Accrescent"
+title: "Ina, Part 1: Smaller, faster, and safer software updates for Accrescent"
 date: 2024-03-20
 draft: false
 ---
