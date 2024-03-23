@@ -28,6 +28,10 @@ showToc = true
   url = "https://twitter.com/@lberrymage"
 
   [[params.socialIcons]]
+  name = "bluesky"
+  url = "https://bsky.app/profile/lberrymage.dev"
+
+  [[params.socialIcons]]
   name = "github"
   url = "https://github.com/lberrymage"
 
