@@ -1,5 +1,6 @@
 baseURL = "https://lberrymage.dev/"
 copyright = "Copyright 2022-2024 Logan Magee"
+enableGitInfo = true
 enableRobotsTXT = true
 languageCode = "en-us"
 title = "Logan's Blog"
