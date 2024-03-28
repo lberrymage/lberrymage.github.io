@@ -129,8 +129,8 @@ following goals:
 - Thorough testing
 - Comparable diff and patch performance to existing implementations
 
-We're happy to say that this effort has been successful with all of the above goals met (except
-Android sandboxing, which will be implemented later). We call the resulting library "Ina."
+We're happy to say that this effort has been successful with all of the above goals met. [^5] We
+call the resulting library "Ina."
 
 # Performance results
 
@@ -188,6 +188,8 @@ part of this series on Ina and delta updates.
 [^4]: This is an oversimplification. Instructions specifying where to place the changes in the new
     binary and which bytes to copy verbatim from the old binary are also necessary, but I decided to
     omit this from the diagram as the details of the algorithm will be explained in part 2.
+[^5]: The original version of this article stated we didn't have Android sandboxing implemented.
+    Sandboxing was implemented only a few days later, so we updated the text to reflect this.
 
 [Accrescent]: https://accrescent.app
 [Accrescent socials]: https://accrescent.app/#social
