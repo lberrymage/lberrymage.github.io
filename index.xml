@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Logan's Blog</title><link rel="alternate" href="https://lberrymage.dev/"/><link rel="self" href="https://lberrymage.dev/index.xml"/><subtitle>Recent content on Logan's Blog</subtitle><id>https://lberrymage.dev/</id><generator uri="http://gohugo.io" version="0.124.1">Hugo</generator><language>en-us</language><updated>2024-03-20T00:00:00Z</updated><author><name>Logan Magee</name></author><rights>Copyright 2022-2024 Logan Magee</rights><entry><title>Ina, Part 1: Smaller, faster, and safer software updates for Accrescent</title><link rel="alternate" href="https://lberrymage.dev/posts/ina-part-1/"/><id>https://lberrymage.dev/posts/ina-part-1/</id><published>2024-03-20T00:00:00Z</published><updated>2024-03-21T01:00:59-07:00</updated><summary type="html">Introduction Well! It&amp;rsquo;s been a long time since I&amp;rsquo;ve shared an Accrescent update here (most development discussion takes place in our Matrix rooms), but today I have a big one: we&amp;rsquo;ve made significant progress in developing delta updates!
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Logan's Blog</title><link rel="alternate" href="https://lberrymage.dev/"/><link rel="self" href="https://lberrymage.dev/index.xml"/><subtitle>Recent content on Logan's Blog</subtitle><id>https://lberrymage.dev/</id><generator uri="http://gohugo.io" version="0.124.1">Hugo</generator><language>en-us</language><updated>2024-03-20T00:00:00Z</updated><author><name>Logan Magee</name></author><rights>Copyright 2022-2024 Logan Magee</rights><entry><title>Ina, Part 1: Smaller, faster, and safer software updates for Accrescent</title><link rel="alternate" href="https://lberrymage.dev/posts/ina-part-1/"/><id>https://lberrymage.dev/posts/ina-part-1/</id><published>2024-03-20T00:00:00Z</published><updated>2024-03-27T17:00:09-07:00</updated><summary type="html">Introduction Well! It&amp;rsquo;s been a long time since I&amp;rsquo;ve shared an Accrescent update here (most development discussion takes place in our Matrix rooms), but today I have a big one: we&amp;rsquo;ve made significant progress in developing delta updates!
 &amp;ldquo;That sounds great and fancy!&amp;rdquo; I hear you say, &amp;ldquo;but what in the world are delta updates, and why would I care?&amp;rdquo;
 Well, to give a quick summary, delta updates bring your software update sizes from looking like this:</summary><content type="html"><![CDATA[<h1 id="introduction">Introduction</h1>
 <p>Well! It&rsquo;s been a long time since I&rsquo;ve shared an <a href="https://accrescent.app">Accrescent</a> update here (most development
@@ -102,8 +102,8 @@ following goals:</p>
 <li>Thorough testing</li>
 <li>Comparable diff and patch performance to existing implementations</li>
 </ul>
-<p>We&rsquo;re happy to say that this effort has been successful with all of the above goals met (except
-Android sandboxing, which will be implemented later). We call the resulting library &ldquo;Ina.&rdquo;</p>
+<p>We&rsquo;re happy to say that this effort has been successful with all of the above goals met. <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> We
+call the resulting library &ldquo;Ina.&rdquo;</p>
 <h1 id="performance-results">Performance results</h1>
 <p>Of course, numbers speak louder than words, so we&rsquo;ve included some results on how Ina stacks up
 against the competition, specifically against one of the most common open-source implementations of
@@ -161,6 +161,10 @@ practice as a part of many popular compression schemes.&#160;<a href="#fnref:3" 
 <p>This is an oversimplification. Instructions specifying where to place the changes in the new
 binary and which bytes to copy verbatim from the old binary are also necessary, but I decided to
 omit this from the diagram as the details of the algorithm will be explained in part 2.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>The original version of this article stated we didn&rsquo;t have Android sandboxing implemented.
+Sandboxing was implemented only a few days later, so we updated the text to reflect this.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
