@@ -165,10 +165,10 @@ much in practice depending on the hardware because it's so low to begin with.
 # Conclusion
 
 We've successfully developed a performant, safe, and robust solution for delta updates to
-incorporate into Accrescent. While Ina is currently missing desired security features such as
-sandboxing, we've already made significant security and performance improvements over existing
-delta update solutions and are confident we can implement the additional improvements we have
-planned.
+incorporate into Accrescent. While there are still ways to improve diffing performance and
+strengthen the library sandbox, [^5] we've already made significant security and performance
+improvements over existing delta update solutions and are confident we can implement the additional
+improvements we have planned.
 
 In part 2 of this series, we'll explore exactly how Ina achieves its performance characteristics and
 perhaps investigate alternative algorithms and performance tricks Ina could take advantage of to
