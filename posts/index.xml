@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Posts on Logan's Blog</title><link rel="alternate" href="https://lberrymage.dev/posts/"/><link rel="self" href="https://lberrymage.dev/posts/index.xml"/><subtitle>Recent content in Posts on Logan's Blog</subtitle><id>https://lberrymage.dev/posts/</id><generator uri="http://gohugo.io" version="0.124.1">Hugo</generator><language>en-us</language><updated>2024-03-20T00:00:00Z</updated><author><name>Logan Magee</name></author><rights>Copyright 2022-2024 Logan Magee</rights><entry><title>Ina, Part 1: Smaller, faster, and safer software updates for Accrescent</title><link rel="alternate" href="https://lberrymage.dev/posts/ina-part-1/"/><id>https://lberrymage.dev/posts/ina-part-1/</id><published>2024-03-20T00:00:00Z</published><updated>2024-03-27T17:00:09-07:00</updated><summary type="html">Introduction Well! It&amp;rsquo;s been a long time since I&amp;rsquo;ve shared an Accrescent update here (most development discussion takes place in our Matrix rooms), but today I have a big one: we&amp;rsquo;ve made significant progress in developing delta updates!
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Posts on Logan's Blog</title><link rel="alternate" href="https://lberrymage.dev/posts/"/><link rel="self" href="https://lberrymage.dev/posts/index.xml"/><subtitle>Recent content in Posts on Logan's Blog</subtitle><id>https://lberrymage.dev/posts/</id><generator uri="http://gohugo.io" version="0.125.0">Hugo</generator><language>en-us</language><updated>2024-03-20T00:00:00Z</updated><author><name>Logan Magee</name></author><rights>Copyright 2022-2024 Logan Magee</rights><entry><title>Ina, Part 1: Smaller, faster, and safer software updates for Accrescent</title><link rel="alternate" href="https://lberrymage.dev/posts/ina-part-1/"/><id>https://lberrymage.dev/posts/ina-part-1/</id><published>2024-03-20T00:00:00Z</published><updated>2024-04-17T13:35:34-07:00</updated><summary type="html">Introduction Well! It&amp;rsquo;s been a long time since I&amp;rsquo;ve shared an Accrescent update here (most development discussion takes place in our Matrix rooms), but today I have a big one: we&amp;rsquo;ve made significant progress in developing delta updates!
 &amp;ldquo;That sounds great and fancy!&amp;rdquo; I hear you say, &amp;ldquo;but what in the world are delta updates, and why would I care?&amp;rdquo;
 Well, to give a quick summary, delta updates bring your software update sizes from looking like this:</summary><content type="html"><![CDATA[<h1 id="introduction">Introduction</h1>
 <p>Well! It&rsquo;s been a long time since I&rsquo;ve shared an <a href="https://accrescent.app">Accrescent</a> update here (most development
@@ -131,10 +131,10 @@ took a drastic lead in patching time. However, it should be noted that patching 
 much in practice depending on the hardware because it&rsquo;s so low to begin with.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>We&rsquo;ve successfully developed a performant, safe, and robust solution for delta updates to
-incorporate into Accrescent. While Ina is currently missing desired security features such as
-sandboxing, we&rsquo;ve already made significant security and performance improvements over existing
-delta update solutions and are confident we can implement the additional improvements we have
-planned.</p>
+incorporate into Accrescent. While there are still ways to improve diffing performance and
+strengthen the library sandbox, <sup id="fnref1:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> we&rsquo;ve already made significant security and performance
+improvements over existing delta update solutions and are confident we can implement the additional
+improvements we have planned.</p>
 <p>In part 2 of this series, we&rsquo;ll explore exactly how Ina achieves its performance characteristics and
 perhaps investigate alternative algorithms and performance tricks Ina could take advantage of to
 further improve its performance.</p>
@@ -164,7 +164,7 @@ omit this from the diagram as the details of the algorithm will be explained in 
 </li>
 <li id="fn:5">
 <p>The original version of this article stated we didn&rsquo;t have Android sandboxing implemented.
-Sandboxing was implemented only a few days later, so we updated the text to reflect this.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+Sandboxing was implemented only a few days later, so we updated the text to reflect this.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
