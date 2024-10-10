@@ -40,7 +40,7 @@ relatively easy to implement. Many software update systems still work this way. 
 working with wide-scale deployments, the naive approach suffers from a considerable issue: a full
 copy of the latest software must be distributed to each client. [^2]
 
-This is turn causes higher bandwidth costs for both clients and the server operator, less frequent
+This in turn causes higher bandwidth costs for both clients and the server operator, less frequent
 updates (which may contain security fixes!), slower rollout, and more update interruptions which may
 require starting the update over from the beginning. The client-facing issues are especially
 troublesome in countries where Wi-Fi isn't commonplace and cellular data is slow and expensive.
