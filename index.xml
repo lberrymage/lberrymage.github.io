@@ -1,6 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Logan's Blog</title><link rel="alternate" href="https://lberrymage.dev/"/><link rel="self" href="https://lberrymage.dev/index.xml"/><subtitle>Recent content on Logan's Blog</subtitle><id>https://lberrymage.dev/</id><generator uri="http://gohugo.io" version="0.125.0">Hugo</generator><language>en-us</language><updated>2024-03-20T00:00:00Z</updated><author><name>Logan Magee</name></author><rights>Copyright 2022-2024 Logan Magee</rights><entry><title>Ina, Part 1: Smaller, faster, and safer software updates for Accrescent</title><link rel="alternate" href="https://lberrymage.dev/posts/ina-part-1/"/><id>https://lberrymage.dev/posts/ina-part-1/</id><published>2024-03-20T00:00:00Z</published><updated>2024-04-17T13:35:34-07:00</updated><summary type="html">Introduction Well! It&amp;rsquo;s been a long time since I&amp;rsquo;ve shared an Accrescent update here (most development discussion takes place in our Matrix rooms), but today I have a big one: we&amp;rsquo;ve made significant progress in developing delta updates!
-&amp;ldquo;That sounds great and fancy!&amp;rdquo; I hear you say, &amp;ldquo;but what in the world are delta updates, and why would I care?&amp;rdquo;
-Well, to give a quick summary, delta updates bring your software update sizes from looking like this:</summary><content type="html"><![CDATA[<h1 id="introduction">Introduction</h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Logan's Blog</title><link rel="alternate" href="https://lberrymage.dev/"/><link rel="self" href="https://lberrymage.dev/index.xml"/><subtitle>Recent content on Logan's Blog</subtitle><id>https://lberrymage.dev/</id><generator uri="http://gohugo.io" version="0.135.0">Hugo</generator><language>en-us</language><updated>2024-03-20T00:00:00Z</updated><author><name>Logan Magee</name></author><rights>Copyright 2022-2024 Logan Magee</rights><entry><title>Ina, Part 1: Smaller, faster, and safer software updates for Accrescent</title><link rel="alternate" href="https://lberrymage.dev/posts/ina-part-1/"/><id>https://lberrymage.dev/posts/ina-part-1/</id><published>2024-03-20T00:00:00Z</published><updated>2024-10-10T18:06:40+02:00</updated><summary type="html">&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;p>Well! It&amp;rsquo;s been a long time since I&amp;rsquo;ve shared an &lt;a href="https://accrescent.app">Accrescent&lt;/a> update here (most development
+discussion takes place in our &lt;a href="https://matrix.to/#/#accrescent-space:matrix.org">Matrix rooms&lt;/a>), but today I have a big one: we&amp;rsquo;ve made significant
+progress in developing delta updates!&lt;/p>
+&lt;p>&amp;ldquo;That sounds great and fancy!&amp;rdquo; I hear you say, &amp;ldquo;but what in the world are delta updates, and why
+would I care?&amp;rdquo;&lt;/p>
+&lt;p>Well, to give a quick summary, delta updates bring your software update sizes from looking like
+this:&lt;/p></summary><content type="html"><![CDATA[<h1 id="introduction">Introduction</h1>
 <p>Well! It&rsquo;s been a long time since I&rsquo;ve shared an <a href="https://accrescent.app">Accrescent</a> update here (most development
 discussion takes place in our <a href="https://matrix.to/#/#accrescent-space:matrix.org">Matrix rooms</a>), but today I have a big one: we&rsquo;ve made significant
 progress in developing delta updates!</p>
@@ -27,7 +32,7 @@ this:</p>
 relatively easy to implement. Many software update systems still work this way. However, when
 working with wide-scale deployments, the naive approach suffers from a considerable issue: a full
 copy of the latest software must be distributed to each client. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
-<p>This is turn causes higher bandwidth costs for both clients and the server operator, less frequent
+<p>This in turn causes higher bandwidth costs for both clients and the server operator, less frequent
 updates (which may contain security fixes!), slower rollout, and more update interruptions which may
 require starting the update over from the beginning. The client-facing issues are especially
 troublesome in countries where Wi-Fi isn&rsquo;t commonplace and cellular data is slow and expensive.
@@ -168,7 +173,11 @@ Sandboxing was implemented only a few days later, so we updated the text to refl
 </li>
 </ol>
 </div>
-]]></content></entry><entry><title>Accrescent has reached public alpha!</title><link rel="alternate" href="https://lberrymage.dev/posts/accrescent-alpha/"/><id>https://lberrymage.dev/posts/accrescent-alpha/</id><published>2022-12-16T00:00:00Z</published><updated>2022-12-16T11:51:45-07:00</updated><summary type="html">As some of you may know, I&amp;rsquo;ve been working on building a new Android app store called Accrescent for almost a year now. My goal was to solve the inherent security, privacy, and usability issues of existing Android app stores by designing a new store from the ground up to address them. Today, I&amp;rsquo;m proud to announce that Accrescent has entered public alpha! You can try it out yourself today by downloading it from our website or from our GitHub releases.</summary><content type="html"><![CDATA[<p>As some of you may know, I&rsquo;ve been working on building a new Android app store called <a href="https://accrescent.app">Accrescent</a>
+]]></content></entry><entry><title>Accrescent has reached public alpha!</title><link rel="alternate" href="https://lberrymage.dev/posts/accrescent-alpha/"/><id>https://lberrymage.dev/posts/accrescent-alpha/</id><published>2022-12-16T00:00:00Z</published><updated>2022-12-16T11:51:45-07:00</updated><summary type="html">&lt;p>As some of you may know, I&amp;rsquo;ve been working on building a new Android app store called &lt;a href="https://accrescent.app">Accrescent&lt;/a>
+for &lt;a href="https://twitter.com/lberrymage/status/1475307653089792003">almost a year now&lt;/a>. My goal was to solve the inherent security, privacy, and usability issues
+of existing Android app stores by designing a new store from the ground up to address them. Today,
+I&amp;rsquo;m proud to announce that Accrescent has entered public alpha! You can try it out yourself today by
+downloading it from &lt;a href="https://accrescent.app">our website&lt;/a> or from our &lt;a href="http://github.com/accrescent/accrescent/releases">GitHub releases&lt;/a>.&lt;/p></summary><content type="html"><![CDATA[<p>As some of you may know, I&rsquo;ve been working on building a new Android app store called <a href="https://accrescent.app">Accrescent</a>
 for <a href="https://twitter.com/lberrymage/status/1475307653089792003">almost a year now</a>. My goal was to solve the inherent security, privacy, and usability issues
 of existing Android app stores by designing a new store from the ground up to address them. Today,
 I&rsquo;m proud to announce that Accrescent has entered public alpha! You can try it out yourself today by
