@@ -173,7 +173,7 @@ Sandboxing was implemented only a few days later, so we updated the text to refl
 </li>
 </ol>
 </div>
-]]></content></entry><entry><title>Accrescent has reached public alpha!</title><link rel="alternate" href="https://lberrymage.dev/posts/accrescent-alpha/"/><id>https://lberrymage.dev/posts/accrescent-alpha/</id><published>2022-12-16T00:00:00Z</published><updated>2022-12-16T11:51:45-07:00</updated><summary type="html">&lt;p>As some of you may know, I&amp;rsquo;ve been working on building a new Android app store called &lt;a href="https://accrescent.app">Accrescent&lt;/a>
+]]></content></entry><entry><title>Accrescent has reached public alpha!</title><link rel="alternate" href="https://lberrymage.dev/posts/accrescent-alpha/"/><id>https://lberrymage.dev/posts/accrescent-alpha/</id><published>2022-12-16T00:00:00Z</published><updated>2025-02-17T15:22:17-07:00</updated><summary type="html">&lt;p>As some of you may know, I&amp;rsquo;ve been working on building a new Android app store called &lt;a href="https://accrescent.app">Accrescent&lt;/a>
 for &lt;a href="https://twitter.com/lberrymage/status/1475307653089792003">almost a year now&lt;/a>. My goal was to solve the inherent security, privacy, and usability issues
 of existing Android app stores by designing a new store from the ground up to address them. Today,
 I&amp;rsquo;m proud to announce that Accrescent has entered public alpha! You can try it out yourself today by
@@ -200,7 +200,7 @@ rooting or a special OS - it just works.</p>
 about how Accrescent works and how it stands out from other Android app stores, check out <a href="https://accrescent.app">our
 website</a>.</p>
 <h3 id="what-does-this-mean">What does this mean?</h3>
-<p>Whitelisted developers can now submit their apps to Accrescent through the <a href="https://dev.accrescent.app">developer console</a>.
+<p>Whitelisted developers can now submit their apps to Accrescent through the <a href="https://console.accrescent.app">developer console</a>.
 Accrescent is still in the early stages, but this alpha release is a major milestone toward
 Accrescent becoming a competitive alternative in the Android app ecosystem.</p>
 <p>Accrescent was built to maintain backwards compatability even across major changes, so even though
