@@ -12,6 +12,7 @@ env = "production"
 defaultTheme = "dark"
 showFullTextInRss = true
 showToc = true
+social = true
 
   [params.assets]
   disableHLJS = true
