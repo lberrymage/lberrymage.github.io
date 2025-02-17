@@ -57,7 +57,7 @@ Here's to the future!
 
 [Accrescent]: https://accrescent.app
 [almost a year now]: https://twitter.com/lberrymage/status/1475307653089792003
-[developer console]: https://dev.accrescent.app
+[developer console]: https://console.accrescent.app
 [long roadmap]: https://github.com/orgs/accrescent/projects/2
 [our website]: https://accrescent.app
 [GitHub]: http://github.com/accrescent
